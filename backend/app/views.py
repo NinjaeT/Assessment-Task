@@ -8,14 +8,18 @@ from.models import Image
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
 def upload_image(request):
-    image = request.data
-    serializer = ImageSerializer(data = image)
-    if serializer.is_valid:
+    
+    data = request.data
+    serializer = ImageSerializer(data = data)
+    print(serializer.is_valid())
+    if serializer.is_valid():
         serializer.save()
-        Response(serializer.data)
-    Response(serializer.errors)
+        print("serializer: ",serializer.data)
+        return Response(serializer.data)
+    print(serializer.errors)
+    return Response(serializer.errors)
     
 @api_view(['GET'])
 def get_images(request):
     images = Image.objects.all()
-    Response(images)
+    return Response(images)

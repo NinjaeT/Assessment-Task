@@ -1,28 +1,26 @@
 import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
+import UploadImages from "./components/UploadImages";
+import Images from "./components/Images";
+import NotFound from "./components/404page";
 
 function App() {
-  const [image, setImage] = useState(null);
-
   return (
-    <>
-      <div className="card">
-        <input
-          type="file"
-          accept="image/*"
-          name="image"
-          id="image"
-          onChange={(event) => {
-            setImage(event.target.files[0]); // Save the selected image
-          }}
-          style={{ display: "none" }}
-        />
-        <label htmlFor="image" className="card-content">
-          <p className="card-title">Upload Image</p>
-          <p className="card-para">Click to upload image</p>
-        </label>
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<UploadImages />} />
+        <Route path="/images" element={<Images />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
