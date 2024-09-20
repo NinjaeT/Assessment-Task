@@ -2,6 +2,49 @@ body{
   background-color: #212121;
 }
 
+
+/* Upload Images */
+
+ .main-container {
+display: flex; 
+flex-direction: column; 
+align-items: center;
+  
+ }
+ 
+ .description-input {
+  border: solid 1.5px #9e9e9e;
+  border-radius: 1rem;
+  background: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #f5f5f5;
+  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+ }
+ 
+ .user-label {
+  position: relative;
+  bottom: 58px;
+  left: 18px;
+  color: #e8e8e8;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: 150ms cubic-bezier(0.4,0,0.2,1);
+ }
+ 
+ .description-input:focus, .description-input:valid {
+  outline: none;
+  border: 1.5px solid #1a73e8;
+ }
+ 
+ .description-input:focus ~ .user-label, .description-input:valid ~ .user-label {
+  transform: translateY(-50%) scale(0.8);
+  background-color: #212121;
+  padding: 0 .2em;
+  color: #2196f3;
+ }
+
+ 
 .upload-card {
   width: 300px;
   height: 200px;
@@ -84,52 +127,191 @@ body{
 
 
 
-.image-card {
-  width: 190px;
-  height: 254px;
-  border-radius: 30px;
-  background: #212121;
-  box-shadow: 15px 15px 30px rgb(25, 25, 25),
-              -15px -15px 30px rgb(60, 60, 60);
- }
- 
 
+  /* Images */
 
- .main-container {
-display: flex; 
-flex-direction: column; 
-align-items: center;
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* Maintain aspect ratio */
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 3px rgb(97 68 181);
+    
+  }
   
- }
- 
- .description-input {
-  border: solid 1.5px #9e9e9e;
-  border-radius: 1rem;
-  background: none;
-  padding: 1rem;
-  font-size: 1rem;
-  color: #f5f5f5;
-  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
- }
- 
- .user-label {
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Preserve aspect ratio */
+   
+  }
+
+
+  /* Delete Button */
+
+/* From Uiverse.io by vinodjangid07 */ 
+.delete-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #7a4242;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
   position: relative;
-  bottom: 58px;
-  left: 18px;
-  color: #e8e8e8;
-  pointer-events: none;
-  transform: translateY(1rem);
-  transition: 150ms cubic-bezier(0.4,0,0.2,1);
- }
- 
- .description-input:focus, .description-input:valid {
-  outline: none;
-  border: 1.5px solid #1a73e8;
- }
- 
- .description-input:focus ~ .user-label, .description-input:valid ~ .user-label {
-  transform: translateY(-50%) scale(0.8);
-  background-color: #212121;
-  padding: 0 .2em;
-  color: #2196f3;
- }
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+.delete-btn:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.delete-btn:hover .svgIcon {
+  width: 50px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.delete-btn::before {
+  position: absolute;
+  top: -20px;
+  content: "Delete";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.delete-btn:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
+
+  /* Pagination */
+  
+  .pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+
+
+  /* Glow Buttons for pages */
+  /* Enabled */
+  .glowbutton {
+    --glow-color: rgb(176, 252, 255);
+    --glow-spread-color: rgba(123, 251, 255, 0.781);
+    --enhanced-glow-color: rgb(206, 255, 255);
+    --btn-color: rgb(61, 127, 136);
+    border: 0.25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em 0.25em var(--glow-color),
+      0 0 4em 1em var(--glow-spread-color),
+      inset 0 0 0.75em 0.25em var(--glow-color);
+    text-shadow: 0 0 0.5em var(--glow-color);
+    position: relative;
+    transition: all 0.3s;
+  }
+  
+  .glowbutton::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--glow-spread-color);
+    filter: blur(2em);
+    opacity: 0.7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+  }
+  
+  .glowbutton:hover {
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 0 0 1em 0.25em var(--glow-color),
+      0 0 4em 2em var(--glow-spread-color),
+      inset 0 0 0.75em 0.25em var(--glow-color);
+  }
+  
+  .glowbutton:active {
+    box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+      0 0 2.5em 2em var(--glow-spread-color),
+      inset 0 0 0.5em 0.25em var(--glow-color);
+  }
+  
+
+  /* Disabled */
+
+  .glowbutton-disabled {
+    --glow-color: rgb(65 90 91);
+    --glow-spread-color: rgb(62 81 81 / 78%);
+    --enhanced-glow-color: rgb(52 78 78);
+    --btn-color: rgb(40 55 57);
+    border: 0.25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 0 0 1em 0.25em var(--glow-color),
+      0 0 4em 1em var(--glow-spread-color),
+      inset 0 0 0.75em 0.25em var(--glow-color);
+    text-shadow: 0 0 0.5em var(--glow-color);
+    position: relative;
+    transition: all 0.3s;
+  }
+  
+  .glowbutton-disabled::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 120%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #687778c7;
+    filter: blur(2em);
+    opacity: 0.7;
+    transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+  }
